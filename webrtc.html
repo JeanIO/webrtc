@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	#video{
+		width: 500px;
+		height: 500px;
+	}
+</style>
+<body>
+	<video id="video" autoplay playsinline></video>
+	<script type="text/javascript">
+		const video = document.querySelector("#video")
+		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia|| navigator.mozGetUserMedia;
+		var contraints = { audio: false, video: true };
+		function successCallback (stream){
+			window.stream = stream
+			video.srcObject = stream
+		}
+		function errorCallback(error){
+			console.log("navigator.getUserMedia error: ", error)
+		}
+		navigator.getUserMedia(contraints, successCallback, errorCallback);
+	</script>
+</body>
+</html>

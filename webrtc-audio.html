@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	#video{
+		width: 500px;
+		height: 500px;
+	}
+</style>
+<body>
+	<button id="audio"> Get the audio</button>
+	<script type="text/javascript">
+		const audioBtn = document.querySelector('button#audio')
+		audioBtn.onclick = function(){
+			navigator.getUserMedia(contraints, successCallback, errorCallback);
+		}
+		var contraints = { audio: true };
+		function successCallback (stream){
+			// create an audio from the stream
+			var audioContext = new AudioContext()
+
+			// connect it to the destination or any other node for processing!
+			var mediaStreamSource = audioContext.createMediaStreamSource(stream);
+
+		}
+		function errorCallback(error){
+			console.log("navigator.getUserMedia error: ", error)
+		}
+
+	</script>
+</body>
+</html>
