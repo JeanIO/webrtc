@@ -23,18 +23,30 @@
 			source.start()
 		}
 
-		const getBuffer = function (url) {
-   const request = new XMLHttpRequest();
-   return new Promise((resolve, reject) => {
-request.open('GET', url, true);
-       request.responseType = 'arraybuffer';
-       request.onload = () => {
-           audioContext.decodeAudioData(request.response, buffer => buffer ? resolve(buffer) : reject('decoding error'));
-       };
-       request.onerror = error => reject(error);
-       request.send();
-   });
-};
+		// const getBuffer = function (url) {
+		// 	const request = new XMLHttpRequest();
+		// 	return new Promise((resolve, reject) => {
+		// 		request.open('GET', url, true);
+		// 		request.responseType = 'arraybuffer';
+		// 		// 这个responseType?
+
+		// 		request.onload = () => {
+		// 			audioContext.decodeAudioData(request.response, buffer => buffer ? resolve(buffer) : reject('decoding error'));
+		// 		};
+		// 		request.onerror = error => reject(error);
+		// 		request.send();
+		// 	});
+		// };
+
+		const getBuffer = function(url){
+			return fetch(url, {method: 'GET'}).then(resp => {
+				return new Promise((resolve, reject) => {
+					resp.arrayBuffer().then(res => {
+						audioContext.decodeAudioData(res, buffer => buffer ? resolve(buffer) : reject('可能哪里错了'));
+					})
+				})
+			})
+		}
 
 
 
