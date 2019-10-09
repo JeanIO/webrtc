@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+		<button id="audio-btn">play</button>
+
+	<audio id="audio-el" autoplay src="http://fs.open.kugou.com/a0dda07ff1101f6578e04a7e0375d22b/5d9d558b/G168/M03/17/05/6A0DAF1WjJWAHblXADF8A_3Sip0849.mp3">
+	<script type="text/javascript">
+		const btn = document.getElementById('audio-btn');
+		const audio = document.getElementById('audio-el')
+		btn.onclick = function(){
+			audio.play()
+		}
+		// var audio = new Audio()
+		// audio.auto = true
+		// audio.src="http://fs.open.kugou.com/a0dda07ff1101f6578e04a7e0375d22b/5d9d558b/G168/M03/17/05/6A0DAF1WjJWAHblXADF8A_3Sip0849.mp3"
+	</script>
+</body>
+</html>

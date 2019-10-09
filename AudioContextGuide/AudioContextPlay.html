@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="play-btn">play</button>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		const URL = 'http://fs.open.kugou.com/a0dda07ff1101f6578e04a7e0375d22b/5d9d558b/G168/M03/17/05/6A0DAF1WjJWAHblXADF8A_3Sip0849.mp3';
+		const audioContext = new AudioContext()
+		const playBtn = document.getElementById('play-btn')
+		playBtn.onclick = function() {
+			getBuffer(URL, function(Buffer){
+				playAudio(Buffer);
+			})
+		}
+		const playAudio = function(buffer){
+			const source = audioContext.createBufferSource()
+			source.buffer = buffer
+			source.connect(audioContext.destination)
+			source.start()
+		}
+
+		const getBuffer = function(url, callBack){
+			$.ajax({
+				url: 'http://fs.open.kugou.com/a0dda07ff1101f6578e04a7e0375d22b/5d9d558b/G168/M03/17/05/6A0DAF1WjJWAHblXADF8A_3Sip0849.mp3',
+				type: 'get',
+				dataType: 'jsonp',
+				jsonp: 'callback',
+				jsonpCallback: 'callback_success',
+				success: function(data){
+					if(data.status == 200){
+						console.log(data);
+						callBack(data)
+					}
+				}
+			})
+		}
+
+
+
+
+
+	</script>
+</body>
+</html>
